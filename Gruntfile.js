@@ -1,7 +1,7 @@
 'use sctrie';
 module.exports = function(grunt){
  require('load-grunt-tasks')(grunt);
- require('time-grunt')(grunt);
+ //require('time-grunt')(grunt);
  var config = {
  	app:'app',
  	dist:'dist'
@@ -10,19 +10,19 @@ module.exports = function(grunt){
  	config:config,
  	concat:{
  		js:{
- 			src:'webapp/js/**.js',
- 			dest:'webapp/js/index.min.js'
+ 			src:'app/js/**.js',
+ 			dest:'app/js/index.min.js'
  		}
  	},
  	clean:{
  		js:{
- 			src:'webapp/js/index.min.js'
+ 			src:'app/js/index.min.js'
  		}
  	},
  	sass: {
 		dist: {
 		  files: {
-		    'webapp/style/css/mian.css': 'webapp/style/scss/main.scss',
+		    'app/style/css/mian.css': 'app/style/scss/main.scss',
 		  }
 		}
 	},
@@ -36,7 +36,7 @@ module.exports = function(grunt){
         options: {
           open: true, //自动打开网页 http://
           base: [
-            'webapp'  //主目录
+            'app'  //主目录
           ]
         }
       }
@@ -48,21 +48,21 @@ module.exports = function(grunt){
         },
 
         files: [  //下面文件的改变就会实时刷新网页
-          'webapp/*.html',
-          'webapp/style/{,*/}*.scss',
-          'webapp/js/{,*/}*.js',
-          'webapp/img/{,*/}*.{png,jpg,gif}'
+          'app/*.html',
+          'app/style/{,*/}*.scss',
+          'app/js/{,*/}*.js',
+          'app/img/{,*/}*.{png,jpg,gif}'
         ],
         tasks:['sass']
       },
     //   sass: {
-    //     files: 'webapp/style/**/*.scss',
+    //     files: 'app/style/**/*.scss',
     //     tasks: 'sass'
     // }
     },
  	inline:{
  		test:{
- 			src:['webapp/index.html']
+ 			src:['app/index.html']
  		}
  	},
  	rev:{
@@ -72,17 +72,17 @@ module.exports = function(grunt){
 		    length: 8
  		},
  		cssJs:{
- 			src:['webapp/js/*.js','webapp/style/css/*.css']
+ 			src:['app/js/*.js','app/style/css/*.css']
  		}
  	},
  	usemin:{
         css:{
             files:{
-                src:['webapp/style/css/*.css']
+                src:['app/style/css/*.css']
             }
         },
-        js:['webapp/js/*.js'],
-        html:['webapp/index.html'],
+        js:['app/js/*.js'],
+        html:['app/index.html'],
         options:{                    //替换静态文件引地址前缀
             filePrefixer:function(url){
                 if(!url){
@@ -102,9 +102,6 @@ grunt.registerTask('serve', [
     'connect:server',
     'watch'
  ]);
-grunt.grunt.registerTask('bulid', []);
  grunt.registerTask('default', ['clean','concat']);
 
 };
-
-// 存在的问题  就是如何保证上线路径
